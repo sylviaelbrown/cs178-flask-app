@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Top 10 Cities by Population</title>
+  </head>
+  <body>
+    <h1>Top 10 Cities by Population</h1>
+
+    <ul>
+    {% for city in results %}
+        <li>{{ city.Name }} - {{ city.Population }}</li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>

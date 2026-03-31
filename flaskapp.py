@@ -5,7 +5,7 @@
 from flask import Flask
 from flask import render_template
 from flask import Flask, render_template, request, redirect, url_for, flash
-from dbCode import *
+from dbCode import get_top_cities
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -58,6 +58,15 @@ def display_users():
     # note that this could have been a result from an SQL query :) 
     users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
     return render_template('display_users.html', users = users_list)
+
+
+@app.route('/top-pop-city')
+def top_cities():
+    cities = get_top_cities()
+    return render_template("top_cities.html", results=cities)
+    
+
+
 
 
 # these two lines of code should always be the last in the file

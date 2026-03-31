@@ -1,9 +1,9 @@
 # dbCode.py
-# Author: Your Name
+# Author: Sylvia Brown
 # Helper functions for database connection and queries
 
 import pymysql
-#import creds
+import creds
 
 def get_conn():
     """Returns a connection to the MySQL RDS instance."""
@@ -22,3 +22,12 @@ def execute_query(query, args=()):
     rows = cur.fetchall()
     cur.close()
     return rows
+
+def get_top_cities():
+    query = '''
+        FROM City
+        SELECT Name, Population
+        ORDER BY Population DESC
+        LIMIT 10;
+        '''
+    return execute_query(query)
