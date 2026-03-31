@@ -25,8 +25,8 @@ def execute_query(query, args=()):
 
 def get_top_cities():
     query = '''
-        FROM City
         SELECT Name, Population
+        FROM City
         ORDER BY Population DESC
         LIMIT 10;
         '''
