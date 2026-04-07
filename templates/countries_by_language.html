@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Countries by Language</title>
+  </head>
+  <body>
+
+    <h1>Countries by Language</h1>
+    <form action="{{ url_for('countries_by_language') }}" method="post">
+      <label for="name">Enter a Language:</label><br />
+      <input type="text" id="language" name="language" required /><br />
+      <input type="submit" value="Search" />
+    </form>
+
+    <ul>
+    {% for country in results %}
+    <li>{{ country.Country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }}</li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -6,6 +6,7 @@ from flask import Flask
 from flask import render_template
 from flask import Flask, render_template, request, redirect, url_for, flash
 from dbCode import get_top_cities
+from dbCode import country_by_language
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -65,6 +66,18 @@ def top_cities():
     cities = get_top_cities()
     return render_template("top_cities.html", results=cities)
     
+
+
+@app.route('/countries-by-language', methods=['GET', 'POST'])
+def countries_by_language():
+    country_list = []
+    if request.method == 'POST':
+        # Extract form data
+        language = request.form['Language']
+        print("Enter a lanuage:", language)
+        country_list = country_by_language(language)
+        
+        return render_template('countries_by_language.html',results=country_list)
 
 
 

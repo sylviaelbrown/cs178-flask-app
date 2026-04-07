@@ -31,3 +31,14 @@ def get_top_cities():
         LIMIT 10;
         '''
     return execute_query(query)
+
+def country_by_language(language):
+    query = '''
+        SELECT country.Name AS country, country.Continent, country.Region, country.Population, countrylanguage.IsOfficial
+        FROM country 
+        JOIN countrylanguage 
+        ON country.Code = countrylanguage.CountryCode 
+        WHERE countrylanguage.Language= %s
+        ORDER BY country.Name
+    '''
+    return execute_query(query, (language,))
