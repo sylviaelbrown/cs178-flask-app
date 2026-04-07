@@ -77,7 +77,7 @@ def countries_by_language():
         print("Enter a lanuage:", language)
         country_list = country_by_language(language)
         
-        return render_template('countries_by_language.html',results=country_list)
+    return render_template('countries_by_language.html',results=country_list)
 
 
 
