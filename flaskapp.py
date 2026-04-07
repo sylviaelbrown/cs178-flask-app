@@ -73,7 +73,7 @@ def countries_by_language():
     country_list = []
     if request.method == 'POST':
         # Extract form data
-        language = request.form['Language']
+        language = request.form['language']
         print("Enter a lanuage:", language)
         country_list = country_by_language(language)
         
