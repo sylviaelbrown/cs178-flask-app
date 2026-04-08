@@ -1,21 +1,178 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countries by Language</title>
-  </head>
-  <body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <h1>Countries by Language</h1>
-    <form action="{{ url_for('countries_by_language') }}" method="post">
-      <label for="name">Enter a Language:</label><br />
-      <input type="text" id="language" name="language" required /><br />
-      <input type="submit" value="Search" />
-    </form>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe4ec, #ffd6e7, #fff0f5);
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
 
-    <ul>
-    {% for country in results %}
-    <li>{{ country.country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }}</li>
-    {% endfor %}
-    </ul>
-  </body>
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 10px 0 10px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            box-shadow: 0 5px 12px rgba(214, 51, 132, 0.18);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 16px rgba(214, 51, 132, 0.28);
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 12px 30px rgba(214, 51, 108, 0.18);
+            border: 3px solid #f8bbd0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #c2185b;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a64d79;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #d63384;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: 600;
+            color: #c2185b;
+            margin-top: 10px;
+        }
+
+        .form-control {
+            border-radius: 14px;
+            border: 1px solid #f8bbd0;
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        .form-control:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 0.2rem rgba(236, 72, 153, 0.15);
+        }
+
+        .pretty-btn {
+            border: none;
+            border-radius: 18px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 6px 14px rgba(214, 51, 132, 0.18);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .pretty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(214, 51, 132, 0.28);
+        }
+
+        .results-list {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        .results-list li {
+            margin-bottom: 10px;
+            color: #7a3358;
+        }
+
+        .empty-text {
+            text-align: center;
+            color: #ad5b82;
+            margin-top: 15px;
+        }
+
+        .sparkles {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/countries-by-government" class="nav-btn">Government</a>
+        <a href="/countries-by-language" class="nav-btn">Language</a>
+        <a href="/add-favorite-country" class="nav-btn">Add Favorite</a>
+        <a href="/delete-favorite-country" class="nav-btn">Delete Favorite</a>
+        <a href="/update-favorite-country" class="nav-btn">Update Favorite</a>
+        <a href="/display-favorite-countries" class="nav-btn">View Favorites</a>
+    </div>
+
+    <div class="container">
+        <div class="main-card">
+            <div class="sparkles">🌸 💖 🌍</div>
+            <h1 class="page-title">Countries by Language</h1>
+            <p class="subtitle">Search for countries by language and explore where it is spoken.</p>
+
+            <h2 class="section-title">Search</h2>
+            <form action="{{ url_for('countries_by_language') }}" method="post">
+                <label for="language">Enter a Language:</label>
+                <input type="text" class="form-control" id="language" name="language" required>
+                <button type="submit" class="pretty-btn">Search</button>
+            </form>
+
+            <h2 class="section-title mt-4">Search Results</h2>
+            {% if results %}
+                <ul class="results-list">
+                    {% for country in results %}
+                        <li>
+                            {{ country.country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-text">No matching countries found yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
 </html>

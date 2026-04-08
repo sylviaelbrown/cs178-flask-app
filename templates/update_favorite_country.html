@@ -1,19 +1,153 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Favorited Country</title>
-  </head>
-  <body>
-    <h1>Update Favorited Country</h1>
-    <form action="{{ url_for('update_favorite_country') }}" method="post">
-      <label for="country_name">Country Name:</label><br />
-      <input type="text" id="country_name" name="country_name" required /><br />
-      <label for="city_name">City Name:</label><br />
-      <input type="text" id="city_name" name="city_name" required /><br />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-      <label for="notes">Notes:</label><br />
-      <input type="text" id="notes" name="notes" required /><br />
-      <input type="submit" value="Submit" />
-    </form>
-  </body>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe4ec, #ffd6e7, #fff0f5);
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 10px 0 10px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            box-shadow: 0 5px 12px rgba(214, 51, 132, 0.18);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 16px rgba(214, 51, 132, 0.28);
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: 0 12px 30px rgba(214, 51, 108, 0.18);
+            border: 3px solid #f8bbd0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #c2185b;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a64d79;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #c2185b;
+            margin-top: 10px;
+        }
+
+        .form-control {
+            border-radius: 14px;
+            border: 1px solid #f8bbd0;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 0.2rem rgba(236, 72, 153, 0.15);
+        }
+
+        .pretty-btn {
+            border: none;
+            border-radius: 18px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 6px 14px rgba(214, 51, 132, 0.18);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .pretty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(214, 51, 132, 0.28);
+        }
+
+        .sparkles {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/countries-by-government" class="nav-btn">Government</a>
+        <a href="/countries-by-language" class="nav-btn">Language</a>
+        <a href="/add-favorite-country" class="nav-btn">Add Favorite</a>
+        <a href="/delete-favorite-country" class="nav-btn">Delete Favorite</a>
+        <a href="/update-favorite-country" class="nav-btn">Update Favorite</a>
+        <a href="/display-favorite-countries" class="nav-btn">View Favorites</a>
+    </div>
+
+    <div class="container">
+        <div class="main-card">
+            <div class="sparkles">💖 ✏️ 🌷</div>
+            <h1 class="page-title">Update Favorited Country</h1>
+            <p class="subtitle">Edit the city and notes for a country already in your favorites list.</p>
+
+            <form action="{{ url_for('update_favorite_country') }}" method="post">
+                <div class="form-group">
+                    <label for="country_name">Country Name:</label>
+                    <input type="text" class="form-control" id="country_name" name="country_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city_name">City Name:</label>
+                    <input type="text" class="form-control" id="city_name" name="city_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <input type="text" class="form-control" id="notes" name="notes" required>
+                </div>
+
+                <button type="submit" class="pretty-btn">Update Favorite</button>
+            </form>
+        </div>
+    </div>
+
+</body>
 </html>

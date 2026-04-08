@@ -1,31 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Favorited Countries</title>
-    <!-- Bootstrap CSS for styling the table -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorited Countries</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe4ec, #ffd6e7, #fff0f5);
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+        }
+
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 10px 0 10px;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            box-shadow: 0 5px 12px rgba(214, 51, 132, 0.18);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 8px 16px rgba(214, 51, 132, 0.28);
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 30px rgba(214, 51, 108, 0.18);
+            border: 3px solid #f8bbd0;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #c2185b;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a64d79;
+            margin-bottom: 30px;
+        }
+
+        .sparkles {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .pretty-table {
+            border-radius: 18px;
+            overflow: hidden;
+            margin-top: 15px;
+            background: white;
+        }
+
+        .pretty-table thead th {
+            background: linear-gradient(135deg, #ec4899, #d63384);
+            color: white;
+            border: none;
+            text-align: center;
+        }
+
+        .pretty-table td {
+            vertical-align: middle;
+            color: #7a3358;
+            border-color: #f8bbd0;
+        }
+
+        .pretty-table tbody tr:nth-child(even) {
+            background-color: #fff6fa;
+        }
+
+        .empty-text {
+            text-align: center;
+            color: #ad5b82;
+            margin-top: 20px;
+            font-size: 1.05rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mt-5">Favorited Countries</h2>
-        <table class="table table-bordered table-striped mt-3">
-            <thead class="thead-dark"> <!-- creates a dark background for the table header -->
-                <tr>
-                    <th>Country Name</th>
-                    <th>City Name</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody> <!-- table body -- loop through all of the countries -->
-                {% for country in countries %}
-                <tr>
-                    <td>{{ country.country_name }}</td>
-                    <td>{{ country.city_name }}</td>
-                    <td>{{ country.notes }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+    <div class="top-nav">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="/countries-by-government" class="nav-btn">Government</a>
+        <a href="/countries-by-language" class="nav-btn">Language</a>
+        <a href="/add-favorite-country" class="nav-btn">Add Favorite</a>
+        <a href="/delete-favorite-country" class="nav-btn">Delete Favorite</a>
+        <a href="/update-favorite-country" class="nav-btn">Update Favorite</a>
+        <a href="/display-favorite-countries" class="nav-btn">View Favorites</a>
     </div>
- </body>
+
+    <div class="container">
+        <div class="main-card">
+            <div class="sparkles">💖 🌍 ✈️</div>
+            <h1 class="page-title">Favorited Countries</h1>
+            <p class="subtitle">Here are all the countries you’ve saved in your travel planner.</p>
+
+            {% if countries %}
+                <div class="table-wrapper">
+                    <table class="table table-bordered pretty-table">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>City Name</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for country in countries %}
+                            <tr>
+                                <td>{{ country.country_name }}</td>
+                                <td>{{ country.city_name }}</td>
+                                <td>{{ country.notes }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="empty-text">No favorite countries saved yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
 </html>
