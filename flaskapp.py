@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from dbCode import get_top_cities
 from dbCode import country_by_language
 from dbCode import add_country_to_favorites
+from dbCode import delete_favorited_country
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -31,7 +32,7 @@ def add_favorite_country():
         print("Country Name:", country_name, "City name: ", city_name, "Notes: ", notes)
         
         add_country_to_favorites(country_name, city_name, notes)
-        
+
         flash('Country added to favorites! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
         # Redirect to home page or another page upon successful submission
         return redirect(url_for('home'))
@@ -39,22 +40,23 @@ def add_favorite_country():
         # Render the form page if the request method is GET
         return render_template('add_favorite_country.html')
 
-@app.route('/delete-user',methods=['GET', 'POST'])
-def delete_user():
+@app.route('/delete-favorite-country',methods=['GET', 'POST'])
+def delete_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        name = request.form['name']
+        country_name = request.form['country_name']
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console
-        print("Name to delete:", name)
+        print("Country to delete:", country_name)
         
-        flash('User deleted successfully! Hoorah!', 'warning') 
+        delete_favorited_country(country_name)
+        flash('Country deleted successfully! Hoorah!', 'warning') 
         # Redirect to home page or another page upon successful submission
         return redirect(url_for('home'))
     else:
         # Render the form page if the request method is GET
-        return render_template('delete_user.html')
+        return render_template('delete_favorite_country.html')
 
 
 @app.route('/display-users')

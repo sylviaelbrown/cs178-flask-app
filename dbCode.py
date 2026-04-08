@@ -56,3 +56,10 @@ def add_country_to_favorites(country_name, city_name, notes):
         'notes':notes
     }
 )
+    
+def delete_favorited_country(country_name):
+    table.delete_item(
+    Key={
+        'country_name': country_name,
+    }
+)
