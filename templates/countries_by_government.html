@@ -2,20 +2,98 @@
 <html lang="en">
   <head>
     <title>Countries by Government</title>
+    <style>
+      .container {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+      }
+
+      .search-box {
+        width: 40%;
+      }
+
+      .options-box {
+        width: 60%;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .options-box ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+    </style>
   </head>
   <body>
 
     <h1>Countries by Government</h1>
-    <form action="{{ url_for('countries_by_government') }}" method="post">
-      <label for="name">Enter a government form:</label><br />
-      <input type="text" id="government" name="government" required /><br />
-      <input type="submit" value="Search" />
-    </form>
 
-    <ul>
-    {% for country in results %}
-    <li>{{ country.country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }} - {{ country.GovernmentForm }}</li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+      
+      <div class="search-box">
+        <form action="{{ url_for('countries_by_government') }}" method="post">
+          <label for="government">Enter a government form:</label><br />
+          <input type="text" id="government" name="government" required><br><br>
+          <input type="submit" value="Search">
+        </form>
+
+        <h2>Search Results</h2>
+        {% if results %}
+          <ul>
+            {% for country in results %}
+              <li>
+                {{ country.country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }} - {{ country.GovernmentForm }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No matching countries found yet.</p>
+        {% endif %}
+      </div>
+
+      <div class="options-box">
+        <h2>Government Form Options</h2>
+        <ul>
+          <li>Administrated by the UN</li>
+          <li>Autonomous Area</li>
+          <li>Co-administrated</li>
+          <li>Commonwealth of the US</li>
+          <li>Constitutional Monarchy</li>
+          <li>Constitutional Monarchy (Emirate)</li>
+          <li>Constitutional Monarchy, Federation</li>
+          <li>Dependent Territory of Norway</li>
+          <li>Dependent Territory of the UK</li>
+          <li>Dependent Territory of the US</li>
+          <li>Emirate Federation</li>
+          <li>Federal Republic</li>
+          <li>Federation</li>
+          <li>Independent Church State</li>
+          <li>Islamic Emirate</li>
+          <li>Islamic Republic</li>
+          <li>Monarchy</li>
+          <li>Monarchy (Emirate)</li>
+          <li>Monarchy (Sultanate)</li>
+          <li>Nonmetropolitan Territory of France</li>
+          <li>Nonmetropolitan Territory of New Zealand</li>
+          <li>Nonmetropolitan Territory of The Netherlands</li>
+          <li>Occupied by Marocco</li>
+          <li>Overseas Department of France</li>
+          <li>Parlementary Monarchy</li>
+          <li>Parliamentary Coprincipality</li>
+          <li>Part of Denmark</li>
+          <li>People'sRepublic</li>
+          <li>Republic</li>
+          <li>Socialistic Republic</li>
+          <li>Socialistic State</li>
+          <li>Special Administrative Region of China</li>
+          <li>Territorial Collectivity of France</li>
+          <li>Territory of Australia</li>
+          <li>US Territory</li>
+        </ul>
+      </div>
+
+    </div>
+
   </body>
 </html>
