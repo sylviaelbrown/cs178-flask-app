@@ -69,13 +69,17 @@ def display_favorited_countries():
     return response['Items']
 
 def update_favorited_country(country_name, city_name, notes):
-    table.update_item(
-        Key={
-            'country_name':country_name
-        },
-        UpdateExpression="SET city_name = :c, notes = :n",
-        ExpressionAttributeValues={":c": city_name, ":n": notes}
-)
+    try: 
+        table.update_item(
+            Key={
+                'country_name':country_name
+            },
+            UpdateExpression="SET city_name = :c, notes = :n",
+            ExpressionAttributeValues={":c": city_name, ":n": notes},
+            ConditionExpression="attribute_exists(country_name)"
+        )
+    except: 
+        return False
         
 
 
