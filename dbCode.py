@@ -4,6 +4,10 @@
 
 import pymysql
 import creds
+import boto3
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+table = dynamodb.Table('FavoriteCountries')
+
 
 def get_conn():
     """Returns a connection to the MySQL RDS instance."""
@@ -42,3 +46,13 @@ def country_by_language(language):
         ORDER BY country.Name
     '''
     return execute_query(query, (language,))
+
+
+def add_country_to_favorites(country_name, city_name, notes):
+    table.put_item(
+    Item={
+        'country_name':country_name,
+        'city_name':city_name,
+        'notes':notes
+    }
+)

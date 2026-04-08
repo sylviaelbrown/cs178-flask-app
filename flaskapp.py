@@ -7,6 +7,7 @@ from flask import render_template
 from flask import Flask, render_template, request, redirect, url_for, flash
 from dbCode import get_top_cities
 from dbCode import country_by_language
+from dbCode import add_country_to_favorites
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -16,24 +17,27 @@ app.secret_key = 'your_secret_key' # this is an artifact for using flash display
 def home():
     return render_template('home.html')
 
-@app.route('/add-user', methods=['GET', 'POST'])
-def add_user():
+@app.route('/add-favorite-country', methods=['GET', 'POST'])
+def add_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        f_name = request.form['name']
-        l_name = request.form['name']
-        genre = request.form['genre']
+        country_name = request.form['country_name']
+        city_name = request.form['city_name']
+        notes = request.form['notes']
+        
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console
-        print("Name:", f_name, l_name, ":", "Favorite Genre:", genre)
+        print("Country Name:", country_name, "City name: ", city_name, "Notes: ", notes)
         
-        flash('User added successfully! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
+        add_country_to_favorites(country_name, city_name, notes)
+        
+        flash('Country added to favorites! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
         # Redirect to home page or another page upon successful submission
         return redirect(url_for('home'))
     else:
         # Render the form page if the request method is GET
-        return render_template('add_user.html')
+        return render_template('add_favorite_country.html')
 
 @app.route('/delete-user',methods=['GET', 'POST'])
 def delete_user():
