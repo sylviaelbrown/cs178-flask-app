@@ -47,6 +47,15 @@ def country_by_language(language):
     '''
     return execute_query(query, (language,))
 
+def country_by_government(government):
+    query = '''
+        SELECT country.Name AS country, country.Continent, country.Region, country.Population, country.GovernmentForm
+        FROM country 
+        WHERE GovernmentForm = %s
+        ORDER BY country.Name
+    '''
+    return execute_query(query, (government,))
+
 
 def add_country_to_favorites(country_name, city_name, notes):
     table.put_item(

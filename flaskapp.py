@@ -11,6 +11,8 @@ from dbCode import add_country_to_favorites
 from dbCode import delete_favorited_country
 from dbCode import display_favorited_countries
 from dbCode import update_favorited_country
+from dbCode import country_by_government
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -117,7 +119,16 @@ def countries_by_language():
     return render_template('countries_by_language.html',results=country_list)
 
 
-
+@app.route('/countries-by-government', methods=['GET', 'POST'])
+def countries_by_government():
+    country_list = []
+    if request.method == 'POST':
+        # Extract form data
+        government = request.form['government']
+        print("Enter a government:", government)
+        country_list = country_by_government(government)
+        
+    return render_template('countries_by_government.html',results=country_list)
 
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':

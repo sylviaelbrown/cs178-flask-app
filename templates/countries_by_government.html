@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Countries by Government</title>
+  </head>
+  <body>
+
+    <h1>Countries by Government</h1>
+    <form action="{{ url_for('countries_by_government') }}" method="post">
+      <label for="name">Enter a government form:</label><br />
+      <input type="text" id="government" name="government" required /><br />
+      <input type="submit" value="Search" />
+    </form>
+
+    <ul>
+    {% for country in results %}
+    <li>{{ country.country }} - {{ country.Continent }} - {{ country.Region }} - {{ country.Population }} - {{ country.GovernmentForm }}</li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
