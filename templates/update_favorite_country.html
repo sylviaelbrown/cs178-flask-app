@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Update Favorited Country</title>
+  </head>
+  <body>
+    <h1>Update Favorited Country</h1>
+    <form action="{{ url_for('update_favorite_country') }}" method="post">
+      <label for="country_name">Country Name:</label><br />
+      <input type="text" id="country_name" name="country_name" required /><br />
+      <label for="city_name">City Name:</label><br />
+      <input type="text" id="city_name" name="city_name" required /><br />
+
+      <label for="notes">Notes:</label><br />
+      <input type="text" id="notes" name="notes" required /><br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

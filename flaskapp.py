@@ -10,6 +10,7 @@ from dbCode import country_by_language
 from dbCode import add_country_to_favorites
 from dbCode import delete_favorited_country
 from dbCode import display_favorited_countries
+from dbCode import update_favorited_country
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -58,6 +59,36 @@ def delete_favorite_country():
     else:
         # Render the form page if the request method is GET
         return render_template('delete_favorite_country.html')
+
+@app.route('/update-favorite-country', methods=['GET', 'POST'])
+def update_favorite_country():
+    if request.method == 'POST':
+        # Extract form data
+        country_name = request.form['country_name']
+        city_name = request.form['city_name']
+        notes = request.form['notes']
+        
+        
+        # Process the data (e.g., add it to a database)
+        # For now, let's just print it to the console
+        print("Country Name:", country_name, "City name: ", city_name, "Notes: ", notes)
+        
+        update_successful = update_favorited_country(country_name, city_name, notes)
+        if update_successful:
+
+            flash('Country updated! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
+            # Redirect to home page or another page upon successful submission
+        else:
+            flash('Country not found in favorites. Please edit a country that exists, or add it to your favorites', 'danger')
+        return redirect(url_for('home'))
+    else:
+        # Render the form page if the request method is GET
+        return render_template('update_favorite_country.html')
+
+
+
+
+
 
 
 @app.route('/display-favorite-countries')

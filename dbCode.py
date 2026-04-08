@@ -67,3 +67,20 @@ def delete_favorited_country(country_name):
 def display_favorited_countries():
     response = table.scan()
     return response['Items']
+
+def update_favorited_country(country_name, city_name, notes):
+    table.update_item(
+        Key={
+            'country_name':country_name
+        },
+        UpdateExpression="SET city_name = :c, notes = :n",
+        ExpressionAttributeValues={":c": city_name, ":n": notes}
+)
+        
+
+
+
+
+
+
+
