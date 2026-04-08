@@ -24,9 +24,9 @@ def home():
 def add_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name']
-        city_name = request.form['city_name']
-        notes = request.form['notes']
+        country_name = request.form['country_name'].strip()
+        city_name = request.form['city_name'].strip()
+        notes = request.form['notes'].strip()
         
         
         # Process the data (e.g., add it to a database)
@@ -46,7 +46,7 @@ def add_favorite_country():
 def delete_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name']
+        country_name = request.form['country_name'].strip()
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console
@@ -64,10 +64,9 @@ def delete_favorite_country():
 def update_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name']
-        city_name = request.form['city_name']
-        notes = request.form['notes']
-        
+        country_name = request.form['country_name'].strip()
+        city_name = request.form['city_name'].strip()
+        notes = request.form['notes'].strip()
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console
@@ -75,7 +74,6 @@ def update_favorite_country():
         
         update_successful = update_favorited_country(country_name, city_name, notes)
         if update_successful:
-
             flash('Country updated! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
             # Redirect to home page or another page upon successful submission
         else:
