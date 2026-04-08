@@ -65,7 +65,7 @@ def display_favorite_countries():
     # hard code a value to the users_list;
     # note that this could have been a result from an SQL query :) 
     countries_list = display_favorited_countries()
-    return render_template('display_favorite_country.html', countries=countries_list)
+    return render_template('display_favorite_countries.html', countries=countries_list)
 
 
 @app.route('/top-pop-city')
