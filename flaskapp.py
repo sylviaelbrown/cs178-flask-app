@@ -73,11 +73,12 @@ def update_favorite_country():
         print("Country Name:", country_name, "City name: ", city_name, "Notes: ", notes)
         
         update_successful = update_favorited_country(country_name, city_name, notes)
-        if update_successful:
+        if update_successful==True:
             flash('Country updated! Huzzah!', 'success')  # 'success' is a category; makes a green banner at the top
             # Redirect to home page or another page upon successful submission
         else:
             flash('Country not found in favorites. Please edit a country that exists, or add it to your favorites', 'danger')
+        
         return redirect(url_for('home'))
     else:
         # Render the form page if the request method is GET

@@ -78,6 +78,7 @@ def update_favorited_country(country_name, city_name, notes):
             ExpressionAttributeValues={":c": city_name, ":n": notes},
             ConditionExpression="attribute_exists(country_name)"
         )
+        return True
     except: 
         return False
         
