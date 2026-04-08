@@ -63,3 +63,7 @@ def delete_favorited_country(country_name):
         'country_name': country_name,
     }
 )
+
+def display_favorited_countries():
+    response = table.scan()
+    return response['Items']

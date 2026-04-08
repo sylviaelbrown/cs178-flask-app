@@ -9,6 +9,7 @@ from dbCode import get_top_cities
 from dbCode import country_by_language
 from dbCode import add_country_to_favorites
 from dbCode import delete_favorited_country
+from dbCode import display_favorited_countries
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' # this is an artifact for using flash displays; 
@@ -59,12 +60,12 @@ def delete_favorite_country():
         return render_template('delete_favorite_country.html')
 
 
-@app.route('/display-users')
-def display_users():
+@app.route('/display-favorite-countries')
+def display_favorite_countries():
     # hard code a value to the users_list;
     # note that this could have been a result from an SQL query :) 
-    users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
-    return render_template('display_users.html', users = users_list)
+    countries_list = display_favorited_countries()
+    return render_template('display_favorite_country.html', countries=countries_list)
 
 
 @app.route('/top-pop-city')

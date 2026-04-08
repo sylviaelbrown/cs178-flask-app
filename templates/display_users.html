@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Users List</title>
+    <title> Favorited Countries</title>
     <!-- Bootstrap CSS for styling the table -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="mt-5">Users List</h2>
+        <h2 class="mt-5">Favorited Countries</h2>
         <table class="table table-bordered table-striped mt-3">
             <thead class="thead-dark"> <!-- creates a dark background for the table header -->
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Favorite Genre</th>
+                    <th>Country Name</th>
+                    <th>City Name</th>
+                    <th>Notes</th>
                 </tr>
             </thead>
-            <tbody> <!-- table body -- loop through all of the users -->
-                {% for user in users %}
+            <tbody> <!-- table body -- loop through all of the countries -->
+                {% for country in countries %}
                 <tr>
-                    <td>{{ user[0] }}</td>
-                    <td>{{ user[1] }}</td>
-                    <td>{{ user[2] }}</td>
+                    <td>{{ country.country_name }}</td>
+                    <td>{{ country.city_name }}</td>
+                    <td>{{ country.notes }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
