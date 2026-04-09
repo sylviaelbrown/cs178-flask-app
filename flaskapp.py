@@ -5,7 +5,6 @@
 from flask import Flask
 from flask import render_template
 from flask import Flask, render_template, request, redirect, url_for, flash
-from dbCode import get_top_cities
 from dbCode import country_by_language
 from dbCode import add_country_to_favorites
 from dbCode import delete_favorited_country
