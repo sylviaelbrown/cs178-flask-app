@@ -27,14 +27,6 @@ def execute_query(query, args=()):
     cur.close()
     return rows
 
-def get_top_cities():
-    query = '''
-        SELECT Name, Population
-        FROM city
-        ORDER BY Population DESC
-        LIMIT 10;
-        '''
-    return execute_query(query)
 
 def country_by_language(language):
     query = '''
@@ -42,10 +34,12 @@ def country_by_language(language):
         FROM country 
         JOIN countrylanguage 
         ON country.Code = countrylanguage.CountryCode 
-        WHERE countrylanguage.Language= %s
+        WHERE countrylanguage.Language= %s 
         ORDER BY country.Name
     '''
-    return execute_query(query, (language,))
+    return execute_query(query, (language,)) #had to research and experiment with syntax here, and below
+
+#had to google and experiment with syntax on the %s
 
 def country_by_government(government):
     query = '''
@@ -72,8 +66,8 @@ def delete_favorited_country(country_name):
         Key={
             'country_name': country_name,
         },
-        ConditionExpression="attribute_exists(country_name)"
-)
+        ConditionExpression="attribute_exists(country_name)" #combined with route, if user tries to delete an item that does not exist, its going to to say 'you can't do that!'
+        )
         return True
     except:
         return False
@@ -81,6 +75,7 @@ def delete_favorited_country(country_name):
 def display_favorited_countries():
     response = table.scan()
     return response['Items']
+
 
 def update_favorited_country(country_name, city_name, notes):
     try: 
@@ -90,7 +85,7 @@ def update_favorited_country(country_name, city_name, notes):
             },
             UpdateExpression="SET city_name = :c, notes = :n",
             ExpressionAttributeValues={":c": city_name, ":n": notes},
-            ConditionExpression="attribute_exists(country_name)"
+            ConditionExpression="attribute_exists(country_name)" #combined with route, if user tries to update an item that does not exist, its going to to say 'you can't do that!'
         )
         return True
     except: 

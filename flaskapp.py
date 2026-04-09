@@ -32,7 +32,7 @@ def add_favorite_country():
         
         
         # Process the data (e.g., add it to a database)
-        # For now, let's just print it to the console
+
         print("Country Name:", country_name, "City name: ", city_name, "Notes: ", notes)
         
         add_country_to_favorites(country_name, city_name, notes)
@@ -51,7 +51,6 @@ def delete_favorite_country():
         country_name = request.form['country_name'].strip().lower()
         
         # Process the data (e.g., add it to a database)
-        # For now, let's just print it to the console
         print("Country to delete:", country_name)
         
         delete_successful = delete_favorited_country(country_name)
@@ -98,17 +97,9 @@ def update_favorite_country():
 
 @app.route('/display-favorite-countries')
 def display_favorite_countries():
-    # hard code a value to the users_list;
-    # note that this could have been a result from an SQL query :) 
     countries_list = display_favorited_countries()
     return render_template('display_favorite_countries.html', countries=countries_list)
 
-
-@app.route('/top-pop-city')
-def top_cities():
-    cities = get_top_cities()
-    return render_template("top_cities.html", results=cities)
-    
 
 
 @app.route('/countries-by-language', methods=['GET', 'POST'])
@@ -134,6 +125,7 @@ def countries_by_government():
         
     return render_template('countries_by_government.html',results=country_list)
 
-# these two lines of code should always be the last in the file
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
