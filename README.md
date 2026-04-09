@@ -142,6 +142,7 @@ The JOIN query used in this project combines the country and countrylanguage tab
 
 <!-- What was the hardest part? What did you learn? Any interesting design decisions? -->
 For me, the hardest aspect of this project was separating my helper tools and Flask routes. In previous labs, we had kept everything pretty much in one file, so it took a bit of practice to figure out what needed to exist where. I also faced a bit of a challenge with error handling. With this, I eventually added .strip() and .lower() functions to normalize spaces and capitalization, and also utilized try/except in the update and delete helper tools to ensure that the information being altered or deleted actually exists. With this, I again faced the challenge of separating the helper tools and Flask routes, which I thought was more challenging when it came to the try/except.
+
 ---
 
 ## AI Assistance
