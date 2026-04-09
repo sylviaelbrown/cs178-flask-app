@@ -26,9 +26,9 @@ def home():
 def add_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name'].strip()
-        city_name = request.form['city_name'].strip()
-        notes = request.form['notes'].strip()
+        country_name = request.form['country_name'].strip().lower()
+        city_name = request.form['city_name'].strip().lower()
+        notes = request.form['notes'].strip().lower()
         
         
         # Process the data (e.g., add it to a database)
@@ -48,16 +48,20 @@ def add_favorite_country():
 def delete_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name'].strip()
+        country_name = request.form['country_name'].strip().lower()
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console
         print("Country to delete:", country_name)
         
-        delete_favorited_country(country_name)
-        flash('Country deleted successfully! Hoorah!', 'warning') 
+        delete_successful = delete_favorited_country(country_name)
+        if delete_successful==True:
+            flash('Country deleted successfully! Hoorah!', 'success') 
         # Redirect to home page or another page upon successful submission
+        else:
+            flash("You can't delete a country that doesn't exist in your favorites!", 'warning') 
         return redirect(url_for('home'))
+        
     else:
         # Render the form page if the request method is GET
         return render_template('delete_favorite_country.html')
@@ -66,9 +70,9 @@ def delete_favorite_country():
 def update_favorite_country():
     if request.method == 'POST':
         # Extract form data
-        country_name = request.form['country_name'].strip()
-        city_name = request.form['city_name'].strip()
-        notes = request.form['notes'].strip()
+        country_name = request.form['country_name'].strip().lower()
+        city_name = request.form['city_name'].strip().lower()
+        notes = request.form['notes'].strip().lower()
         
         # Process the data (e.g., add it to a database)
         # For now, let's just print it to the console

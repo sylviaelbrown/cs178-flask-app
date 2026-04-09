@@ -67,12 +67,17 @@ def add_country_to_favorites(country_name, city_name, notes):
 )
     
 def delete_favorited_country(country_name):
-    table.delete_item(
-    Key={
-        'country_name': country_name,
-    }
+    try: 
+        table.delete_item(
+        Key={
+            'country_name': country_name,
+        },
+        ConditionExpression="attribute_exists(country_name)"
 )
-
+        return True
+    except:
+        return False
+    
 def display_favorited_countries():
     response = table.scan()
     return response['Items']
